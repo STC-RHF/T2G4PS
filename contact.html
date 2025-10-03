@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Time To Give For Palestine</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #007bff;
+            --secondary: #000;
+            --light: #fff;
+            --gray: #6c757d;
+            --border: #e9ecef;
+            --accent: #2a688a;
+            --highlight-color: yellow; /* لون الـ Highlight للبحث */
+        }
+
+        /* ---------------------------------- */
+        /* --- الأساسيات والتنسيقات العامة --- */
+        /* ---------------------------------- */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--light);
+            color: var(--secondary);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .highlight {
+            background-color: var(--highlight-color);
+            color: var(--secondary);
+            padding: 1px 3px;
+            border-radius: 3px;
+            font-weight: bold;
+            display: inline;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* ---------------------------------- */
+        /* --- تنسيقات الـ NAVBAR المُحدثة (Flexbox) --- */
+        /* ---------------------------------- */
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* تعديل ليتوزع المحتوى على الشاشات الكبيرة */
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--light);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            /* تم إزالة margin-right: 30px; للسماح بالتوزيع التلقائي عبر justify-content: space-between */
+            flex-shrink: 1;
+            min-width: 0;
+        }
+
+        .nav-links a {
+            white-space: nowrap;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: var(--primary);
+            font-weight: 600
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            /* تم إزالة margin-left: auto; */
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            width: 250px;
+            padding: 5px 10px;
+            border: none;
+            border-bottom: 2px solid var(--primary);
+            outline: none;
+            font-size: 16px;
+            background-color: transparent;
+            margin-right: 10px;
+        }
+
+        .nav-select-menu {
+            display: none;
+            width: 180px;
+        }
+
+        .nav-select-menu select {
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+            outline: none;
+        }
+        /* ---------------------------------- */
+
+        .page-title {
+            background: #f5f7fa;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-title h1 {
+            font-size: 40px;
+            margin: 0;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin: 0 0 15px 0;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        p.lead {
+            color: var(--gray);
+            margin: 0 0 15px 0;
+        }
+
+        .form-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* ---------------------------------- */
+        /* --- تنسيقات الـ GRID لنموذج الإتصال --- */
+        /* ---------------------------------- */
+        .form-grid {
+            display: grid;
+            /* 4 أعمدة في الديسكتوب لإضافة Subject كعمود مستقل بدلاً من span 2 */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        /* تم تعديل هذا ليأخذ حقل Name و Email فقط عرض 1fr بدلاً من 1/3 */
+        /* الآن، الافتراضي هو 1fr، لذا لا نحتاج لتحديد عرض 1/3 بشكل صريح */
+
+        /* تحديد مجال الرسالة ليمتد على كامل العرض (4 أعمدة) */
+        .field.message-field {
+            grid-column: 1 / -1;
+        }
+
+        /* تحديد حقل الهاتف (Phone) ليأخذ عموداً واحداً (الأخ الثالث) */
+        .form-grid > .field:nth-child(3) {
+             grid-column: 3 / span 1; /* يبدأ من العمود 3 ويأخذ 1 عمود */
+        }
+
+        /* تحديد حقل الموضوع (Subject) ليأخذ عموداً واحداً (الأخ الرابع) */
+        .form-grid > .field:nth-child(4) {
+             grid-column: 4 / span 1; /* يبدأ من العمود 4 ويأخذ 1 عمود */
+        }
+
+        .field {
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: var(--secondary);
+        }
+
+        .vis-label {
+            position: absolute;
+            left: -9999px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), #60a5fa);
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        .footer {
+            background: var(--secondary);
+            color: var(--light);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer .social-icons a {
+            color: var(--light);
+            margin: 0 10px;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            text-decoration: none;
+        }
+
+        .footer p {
+            margin: 8px 0 0;
+            font-size: 14px;
+        }
+
+        /* ---------------------------------- */
+        /* --- Media Queries (نقاط التوقف) --- */
+        /* ---------------------------------- */
+
+        /* الأجهزة اللوحية الكبيرة / شاشات صغيرة (1100px و أقل) */
+        @media (max-width: 1100px) {
+            .nav-links {
+                gap: 10px;
+            }
+
+            .search-input {
+                width: 180px;
+            }
+
+            /* نموذج الإتصال: تحويل من 4 أعمدة إلى 2 عمود */
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* حقول Name و Email (1 و 2) تكون 1fr لكل منهما (وهذا الافتراضي الآن) */
+            /* حقول Phone و Subject تحتاج لتأخذ عرضاً كاملاً (2 عمود) */
+            .form-grid > .field:nth-child(3), /* حقل الهاتف */
+            .form-grid > .field:nth-child(4) { /* حقل الموضوع */
+                grid-column: 1 / -1; /* من العمود الأول حتى نهاية الشبكة */
+            }
+        }
+
+        /* الأجهزة اللوحية (900px و أقل) */
+        @media (max-width: 900px) {
+            /* شريط التنقل */
+            .navbar {
+                justify-content: space-between;
+                flex-wrap: wrap; /* نضمن أن العناصر تنزل لسطر جديد لو ضاقت الشاشة */
+            }
+
+            .nav-links {
+                display: none; /* إخفاء الروابط واستخدام قائمة الـ Select */
+            }
+
+            .nav-select-menu {
+                display: block;
+                order: 1; /* ترتيب القائمة المنسدلة في البداية */
+                margin-right: 15px;
+                width: 160px;
+            }
+
+            .search-container {
+                order: 2; /* ترتيب البحث بعد القائمة المنسدلة */
+                margin-left: 0;
+                flex-grow: 1; /* تسمح للبحث بأخذ المساحة المتبقية */
+                justify-content: flex-end; /* دفع مربع البحث إلى اليمين */
+            }
+
+            .search-input {
+                width: 140px;
+            }
+
+            /* نموذج الإتصال (يبقى على 2 عمود كما في 1100px) */
+            /* لا تغيير هنا طالما أن التنسيق عند 1100px مُرضٍ */
+
+        }
+
+        /* الهواتف الذكية (600px و أقل) - التعديلات الجوهرية للـ Navbar والـ Form */
+        @media (max-width: 600px) {
+            /* شريط التنقل: تعديل ليصبحوا على نفس المستوى (Flex Row) */
+            .navbar {
+                flex-direction: row; /* إبقاء العناصر أفقية */
+                align-items: center;
+                flex-wrap: wrap; /* للسماح للروابط بالنزول إذا تم إظهارها مستقبلاً */
+            }
+
+            .nav-select-menu {
+                display: block; /* للتأكد من أنها ظاهرة */
+                width: 50%; /* لتأخذ نصف عرض الشاشة */
+                margin: 0; /* إزالة المسافات العمودية غير الضرورية */
+                order: 1;
+            }
+
+            .search-container {
+                width: 50%; /* لتأخذ نصف عرض الشاشة */
+                order: 2;
+                justify-content: flex-end; /* دفع مربع البحث إلى اليمين */
+                margin: 0;
+            }
+
+            .search-input {
+                width: 100%; /* يجب أن يأخذ عرض حاويته (50%) */
+                margin-right: 10px; /* لإعادة المسافة بين حقل البحث والأيقونة */
+            }
+
+            /* نموذج الإتصال: عمود واحد فقط على الهواتف */
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid > .field {
+                grid-column: 1 / -1 !important; /* لضمان أن كل حقل يأخذ عرض كامل */
+            }
+
+            .form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-actions div:last-child {
+                display: flex;
+                gap: 10px;
+            }
+
+            .btn-primary, .btn-secondary {
+                flex-grow: 1;
+            }
+        }
+
+        /* تعديلات إضافية لشاشات الهاتف الصغيرة جداً (<400px) */
+        @media (max-width: 400px) {
+            .page-title h1 {
+                font-size: 30px;
+            }
+            /* إذا أردت أن يعودوا عمودياً مرة أخرى على الشاشات الأصغر من 400px */
+            /* يمكنك تعديل هذا إذا لم يناسبك الترتيب الأفقي على الشاشات الصغيرة جداً */
+            /*
+            .nav-select-menu, .search-container {
+                width: 100%;
+            }
+            .search-container {
+                margin-top: 10px;
+                justify-content: flex-start;
+            }
+            */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-select-menu">
+            <select id="mobileNavSelect">
+                <option value="#" disabled selected>Navigate...</option>
+                <option value="index.html">Home</option>
+                <option value="about.html">About</option>
+                <option value="achievements.html">Achievements</option>
+                <option value="donate.html">Donate</option>
+                <option value="team.html">Team</option>
+                <option value="contact.html">Contact</option>
+            </select>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="achievements.html">Achievements</a>
+            <a href="donate.html">Donate</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+
+        <div class="search-container">
+            <input type="text" id="pageSearchInput" class="search-input"
+                placeholder="Search page content..." title="Press Enter or click search icon to find in page">
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-title">
+        <h1>Contact Us</h1>
+    </section>
+
+    <main class="container">
+        <div class="card">
+            <h2>Send us a Message</h2>
+            <p class="lead">Have a question, suggestion or need help? Send us a message — we will get back to you within 24
+                hours.</p>
+            <div class="form-wrap">
+                <form id="contactForm" novalidate>
+                    <input class="sr-only" type="text" name="_honey" tabindex="-1" autocomplete="off">
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="name" class="vis-label">Full name</label>
+                            <input id="name" name="name" type="text" placeholder="Your full name" required />
+                        </div>
+                        <div class="field">
+                            <label for="email" class="vis-label">Email</label>
+                            <input id="email" name="email" type="email" placeholder="you@gmail.com" required />
+                        </div>
+                        <div class="field">
+                            <label for="phone" class="vis-label">Phone</label>
+                            <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" />
+                        </div>
+                        <div class="field">
+                            <label for="subject" class="vis-label">Subject</label>
+                            <input id="subject" name="subject" type="text" placeholder="Subject" required />
+                        </div>
+                        <div class="field message-field">
+                            <label for="message" class="vis-label">Message</label>
+                            <textarea id="message" name="message" placeholder="Write your message..."
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="muted">We reply by email — messages delivered anytime.</div>
+                        <div style="display:flex;gap:10px">
+                            <button id="sendBtn" class="btn-primary" type="submit"> <span id="btnText">Send
+                                    Message</span></button>
+                            <button type="reset" class="btn-secondary"> Reset</button>
+                        </div>
+                    </div>
+
+                    <div id="formStatus" class="sr-only" role="status" aria-live="polite"></div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>© 2025 Stc alumni. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // تم الإبقاء على كود JavaScript كما هو لأنه جيد.
+
+        const form = document.getElementById('contactForm');
+        const sendBtn = document.getElementById('sendBtn');
+        const btnText = document.getElementById('btnText');
+        const toast = document.createElement('div');
+        const pageSearchInput = document.getElementById('pageSearchInput');
+        const searchIcon = document.querySelector('.search-icon');
+        const contentContainer = document.body;
+        const mobileNavSelect = document.getElementById('mobileNavSelect');
+
+
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+
+        function showToast(message, isError = false) {
+            toast.textContent = message;
+            toast.style.background = isError ? '#8b0000' : 'var(--secondary)';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        function setLoading(on) {
+            if (on) {
+                sendBtn.setAttribute('disabled', '');
+                btnText.textContent = 'Sending...';
+                sendBtn.style.opacity = 0.6;
+            } else {
+                sendBtn.removeAttribute('disabled');
+                btnText.textContent = 'Send Message';
+                sendBtn.style.opacity = 1;
+            }
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // ============================================
+        // === 1. Form Submission (Simulated AJAX) ===
+        // ============================================
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            // HoneyPot check (anti-bot)
+            if (form.querySelector('input[name="_honey"]').value) return;
+
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const subject = form.subject.value.trim();
+            const message = form.message.value.trim();
+
+            if (!name || !email || !subject || !message) {
+                showToast('Please fill all required fields (Name, Email, Subject, Message).', true);
+                return;
+            }
+            if (!isValidEmail(email)) {
+                showToast('Please enter a valid email address.', true);
+                return;
+            }
+
+            setLoading(true);
+
+            // Simulate server submission (replace with actual fetch/XHR if using a backend)
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate 1.5s delay
+
+            // Success simulation
+            setLoading(false);
+            showToast('✅ Message sent successfully! We will contact you soon.', false);
+            form.reset(); // Clear form on success
+        });
+
+        // ============================================
+        // === 2. Global Search Functionality (Find in Page) ===
+        // ============================================
+
+        // دالة لإزالة الـ Highlights
+        const removeHighlights = () => {
+            document.querySelectorAll('.highlight').forEach(span => {
+                const parent = span.parentNode;
+                parent.replaceChild(document.createTextNode(span.textContent), span);
+                parent.normalize();
+            });
+        };
+
+        // دالة البحث الرئيسية
+        const performGlobalSearch = () => {
+            removeHighlights();
+
+            const query = pageSearchInput.value.trim();
+            if (query === "") {
+                return;
+            }
+
+            const regex = new RegExp(`(${query})`, 'gi');
+            let firstMatchElement = null;
+
+            // استخدام TreeWalker للتنقل في العقد النصية وتجاهل بعض العناصر
+            const walker = document.createTreeWalker(
+                contentContainer,
+                NodeFilter.SHOW_TEXT,
+                {
+                    acceptNode: (node) => {
+                        // تجاهل العقد داخل الوسوم غير المرغوبة وحقول الإدخال
+                        if (node.parentNode.closest('script, style, input, textarea, select')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        if (node.parentNode.classList && node.parentNode.classList.contains('highlight')) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        if (regex.test(node.data)) {
+                            return NodeFilter.FILTER_ACCEPT;
+                        }
+                        return NodeFilter.FILTER_SKIP;
+                    }
+                },
+                false
+            );
+
+            let currentNode;
+            while (currentNode = walker.nextNode()) {
+                const parent = currentNode.parentNode;
+                const newNode = document.createElement('span');
+                newNode.innerHTML = currentNode.data.replace(regex, '<span class="highlight">$1</span>');
+
+                parent.replaceChild(newNode, currentNode);
+
+                if (!firstMatchElement) {
+                    firstMatchElement = newNode.querySelector('.highlight');
+                }
+            }
+
+            // الانتقال إلى أول نتيجة مطابقة
+            if (firstMatchElement) {
+                firstMatchElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                // إظهار تنبيه بعدد النتائج (للتوضيح)
+                const matchCount = document.querySelectorAll('.highlight').length;
+                showToast(`Found ${matchCount} matches for "${query}".`);
+            } else if (query !== "") {
+                showToast(`No matches found for "${query}"`, true);
+            }
+        };
+
+        // ربط دالة البحث بزر Enter
+        pageSearchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performGlobalSearch();
+            }
+        });
+
+        // ربط دالة البحث بأيقونة البحث
+        searchIcon.addEventListener('click', performGlobalSearch);
+
+        // ربط دالة إزالة الـ highlights عند مسح حقل البحث
+        pageSearchInput.addEventListener('input', function () {
+            if (this.value.trim() === "") {
+                removeHighlights();
+            }
+        });
+
+        // ============================================
+        // === 3. Mobile Navigation Select Menu Handler ===
+        // ============================================
+        if (mobileNavSelect) {
+            mobileNavSelect.addEventListener('change', (e) => {
+                const url = e.target.value;
+                if (url && url !== "#") {
+                    window.location.href = url;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
