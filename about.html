@@ -305,15 +305,10 @@
             font-size: 14px
         }
 
-        /* ---------------------------------- */
-        /* --- Media Queries (استجابة التصميم) --- */
-        /* ---------------------------------- */
-
-        /* شاشات الأجهزة اللوحية (Tablet) وما شابهها - من 901 بكسل إلى 1000 بكسل */
         @media (max-width:1000px) {
             .navbar {
                 justify-content: space-between;
-                padding: 15px 20px; 
+                /* ضمان توزيع العناصر في شاشات الجوال */
             }
 
             .nav-links {
@@ -336,73 +331,13 @@
             }
         }
 
-        /* شاشات الأجهزة اللوحية المتوسطة وأسفل (Tablet) - أقل من 900 بكسل */
         @media (max-width:900px) {
             .two-col {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr
             }
 
             .values {
-                flex-direction: column; 
-            }
-
-            .container {
-                padding: 0 15px; 
-            }
-
-            h2 {
-                font-size: 24px;
-            }
-        }
-
-        /* شاشات الجوال الصغيرة (Mobile) - أقل من 600 بكسل */
-        @media (max-width:600px) {
-            /* **التعديلات هنا لجعلهما على سطر واحد**
-            - تم إزالة flex-direction: column; من .navbar 
-            - تم تعديل width لكل من قائمة التنقل والبحث ليأخذا تقريباً 50% من العرض.
-            */
-            .navbar {
-                flex-direction: row; /* التأكيد على العرض الأفقي */
-                justify-content: space-between; /* توزيع المساحة بينهما */
-                align-items: center; /* لمحاذاة العناصر عمودياً */
-                padding: 10px 15px;
-                flex-wrap: nowrap; /* منع التفاف العناصر لأسفل */
-            }
-
-            .nav-select-menu {
-                width: 50%; /* نصف العرض تقريباً لقائمة التنقل */
-                margin-bottom: 0;
-                margin-right: 5px;
-                order: 1;
-            }
-
-            .search-container {
-                width: 50%; /* نصف العرض تقريباً لحاوية البحث */
-                margin-top: 0;
-                margin-left: 0;
-                order: 2;
-            }
-
-            .search-input {
-                width: calc(100% - 30px); /* ليأخذ باقي عرض الحاوية (50%) */
-                margin-right: 0;
-            }
-            
-            .page-title h1 {
-                font-size: 32px;
-                padding-top: 10px;
-            }
-
-            .approach {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            }
-
-            .card {
-                padding: 20px;
-            }
-            
-            .cta {
-                padding: 40px 15px;
+                flex-direction: column
             }
         }
     </style>
@@ -428,7 +363,7 @@
             <a href="about.html" class="active">About</a>
             <a href="achievements.html">Achievements</a>
             <a href="donate.html">Donate</a>
-            <a href="team.html">Team</a>
+            <a href="team.html">Our crew</a>
             <a href="contact.html">Contact</a>
         </nav>
 
@@ -439,7 +374,7 @@
                 <i class="fas fa-search"></i>
             </div>
         </div>
-    </header>
+        </header>
 
     <section class="page-title">
         <h1>About Us</h1>
@@ -448,7 +383,7 @@
     <main class="container">
 
         <section class="grid two-col">
-            <div class="card">
+            <div class="card" id="who-we-are">
                 <h2>Who We Are</h2>
                 <p class="lead">"Time To Give For Palestine" is a **non-profit organization** working to channel donations into
                     humanitarian, educational, and healthcare projects in Palestine. We prioritize **transparency** and **collaboration**
@@ -457,7 +392,7 @@
                     communities for the long run.</p>
             </div>
 
-            <div class="card">
+            <div class="card" id="mission">
                 <h2>Mission & Vision</h2>
                 <div class="values">
                     <div class="value">
@@ -465,7 +400,7 @@
                         <p>To provide **immediate aid** and long-term programs focusing on health, education, and relief for vulnerable
                             communities.</p>
                     </div>
-                    <div class="value">
+                    <div class="value" id="vision">
                         <h3>Vision</h3>
                         <p>**Thriving communities** with equal opportunities, supported by strong local institutions able to create
                             change.</p>
@@ -474,7 +409,7 @@
             </div>
         </section>
 
-        <section id="impact" style="margin-top:30px;">
+        <section id="our-impact" style="margin-top:30px;">
             <h2>Our Impact</h2>
             <p class="lead">Over the years, we have supported thousands of families through **humanitarian relief**, education,
                 healthcare, and **sustainable development programs** in Palestine.</p>
@@ -513,7 +448,7 @@
             </div>
         </section>
 
-        <section class="achievements">
+        <section class="achievements" id="key-achievements">
             <h2>Key Achievements</h2>
             <ul>
                 <li>✅ Delivered food and medical aid to over **1.2 million individuals**.</li>
@@ -524,7 +459,7 @@
             </ul>
         </section>
 
-        <section class="cta">
+        <section class="cta" id="make-difference">
             <h2>Make a Difference Today</h2>
             <p>Your support helps us continue providing relief and hope to families in Palestine.</p>
             <a href="donate.html">Donate Now</a>
@@ -539,7 +474,7 @@
             <a href="#"><i class="fab fa-instagram"></i></a>
             <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
-        <p>© 2025 Stc alumni. All rights reserved.</p>
+        <p>© 2025 STC alumni. All rights reserved.</p>
     </footer>
 
     <script>
@@ -599,6 +534,17 @@
                 },
                 false
             );
+        
+  document.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash;
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  });
+
 
             let currentNode;
             while (currentNode = walker.nextNode()) {
