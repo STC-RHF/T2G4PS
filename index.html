@@ -9,9 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 
@@ -24,7 +22,6 @@
             --gray-text: #6c757d;
             --border-color: #e9ecef;
             --map-primary-color: #2a688a;
-            /* لون الهايلايت الجديد */
             --highlight-color: yellow;
         }
 
@@ -41,8 +38,6 @@
             direction: ltr;
             font-size: 16px;
             line-height: 1.6;
-            /* للتأكد من عدم وجود تمرير أفقي على أي جهاز */
-            overflow-x: hidden;
         }
 
         /* --- Navbar Section --- */
@@ -58,7 +53,6 @@
             z-index: 1000;
         }
 
-        /* قائمة الروابط الأصلية */
         .nav-links {
             display: flex;
             align-items: center;
@@ -80,22 +74,50 @@
             font-weight: 600;
         }
 
-        /* قائمة SELECT المنسدلة */
-        .nav-select-menu {
-            display: none;
-            margin-right: auto;
-            width: 180px;
+        /* Dropdown Team */
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
 
-        .nav-select-menu select {
-            padding: 8px 10px;
+        .dropdown .dropbtn {
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            padding: 5px 10px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--light-color);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 2000; /* فوق الصورة */
             border: 1px solid var(--border-color);
             border-radius: 5px;
-            font-size: 16px;
-            width: 100%;
-            cursor: pointer;
-            outline: none;
         }
+
+        .dropdown-content a {
+            color: var(--secondary-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+  
 
         /* --- Search Bar Styles (مرئية وثابتة) --- */
         .search-container {
@@ -145,8 +167,7 @@
             background-image: url(hands.jpg);
             background-size: cover;
             background-position: center;
-            /* تم إبقاء هذا كما هو للـ Parallax effect */
-            background-attachment: fixed; 
+            background-attachment: fixed;
             height: 450px;
             display: flex;
             justify-content: center;
@@ -196,8 +217,7 @@
 
         .hero-content {
             flex: 1;
-            /* تم تقليل الحد الأقصى للعرض ليتكيف بشكل أفضل على الشاشات الأكبر قليلاً */
-            max-width: 55%; 
+            max-width: 55%;
         }
 
         .hero-content h1 {
@@ -212,8 +232,7 @@
             font-size: 18px;
             color: var(--gray-text);
             margin-bottom: 40px;
-            /* تم زيادة عرض الفقرة قليلاً */
-            max-width: 95%;
+            max-width: 85%;
         }
 
         .hero-image {
@@ -221,14 +240,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* تم زيادة الحد الأقصى للعرض قليلاً ليناسب الصورة */
-            max-width: 45%;
+            max-width: 40%;
         }
 
         .trophy-img {
-            /* تم تحويل العرض إلى نسبة مئوية ليتكيف */
-            width: 100%; 
-            max-width: 370px;
+            width: 370px;
             height: auto;
         }
 
@@ -237,15 +253,10 @@
             gap: 70px;
             margin-top: 50px;
             margin-bottom: 70px;
-            /* تم إضافة تنسيق استجابة أساسي: لف العناصر إذا كانت لا تتسع */
-            flex-wrap: wrap;
-            justify-content: center; /* لتوسيط العناصر عند الالتفاف */
         }
 
         .stat-item {
             text-align: left;
-            /* تم تعديل التمركز ليكون على اليسار للوضع الافتراضي */
-            min-width: 120px;
         }
 
         .stat-number {
@@ -283,8 +294,6 @@
             display: flex;
             gap: 15px;
             margin-bottom: 50px;
-            /* لفة الأزرار على الشاشات الصغيرة */
-            flex-wrap: wrap; 
         }
 
         .year-button {
@@ -297,9 +306,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            /* تحديد عرض الأدوات لضمان توزيع عادل على الشاشات الصغيرة */
-            flex-grow: 1;
-            max-width: 150px;
         }
 
         .year-button.active,
@@ -311,9 +317,8 @@
 
 
         .timeline-grid {
-            /* تعديل الـ minmax ليحتوي عمودين بشكل جيد على الأجهزة اللوحية */
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
@@ -378,25 +383,18 @@
             font-size: 17px;
             font-weight: 700;
             transition: all 0.3s ease;
-            text-align: center; /* لتوسيط النص داخل الزر إذا احتاج الأمر */
         }
 
         /* --- Map Section --- */
         #travelMap {
-            height: 600px; /* تم تقليل الارتفاع قليلاً ليناسب شاشات الهواتف */
-            /* تم تغيير العرض إلى 90% لترك مساحة جانبية على الهواتف ولتسهيل ضبطه */
-            width: 90%; 
+            height: 700px;
+            width: 80%;
             margin: 50px auto;
             border: 5px solid var(--map-primary-color);
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             direction: rtl;
             position: relative;
-        }
-        
-        /* إضافة نمط لتمكين التمرير الأفقي داخل الخريطة فقط إذا لزم الأمر */
-        #travelMap.leaflet-container {
-            touch-action: pan-x pan-y;
         }
 
         .palestine-label {
@@ -428,19 +426,15 @@
             margin-top: 50px;
         }
 
-        .footer .socials {
-            margin-bottom: 20px;
-        }
-        
-        .footer .socials a {
+        .footer .social-icons a {
             color: var(--light-color);
-            margin: 0 5px; /* تقليل الهامش بين الأيقونات */
+            margin: 0 10px;
             font-size: 18px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px; /* تقليل حجم الأيقونة قليلاً */
-            height: 40px; /* تقليل حجم الأيقونة قليلاً */
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.04);
             text-decoration: none;
@@ -449,228 +443,98 @@
 
 
         /* ------------------------------------------- */
-        /* --- Media Query Adjustments (الاستجابة) --- */
+        /* --- Media Query Adjustments (القائمة المنسدلة) --- */
         /* ------------------------------------------- */
 
-        /* شاشات الأجهزة اللوحية الكبيرة / سطح المكتب الصغير (<= 992px) */
         @media (max-width: 992px) {
-            .navbar {
-                padding: 15px 30px;
-            }
-            
-            .nav-links {
-                /* تقليل الفراغ ليتسع الـ Navbar */
-                gap: 15px; 
-            }
-
             .top-hero-content .call-to-action {
                 font-size: 52px;
             }
-            
-            .hero-section {
-                padding: 60px 40px;
-                /* تحويل Hero إلى اتجاه عمودي هنا للحصول على مظهر أفضل على الأجهزة اللوحية */
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-content {
-                max-width: 100%; /* احتلال العرض بالكامل */
-                order: 2; /* وضع المحتوى بعد الصورة على اللوحي */
-            }
-
-            .hero-content p {
-                max-width: 100%; /* السماح للفقرة بأخذ العرض بالكامل */
-            }
-            
-            .hero-image {
-                max-width: 100%; /* احتلال العرض بالكامل */
-                margin-bottom: 40px;
-                order: 1; /* وضع الصورة قبل المحتوى على اللوحي */
-            }
-            
-            .trophy-img {
-                width: 70%;
-                max-width: 300px; /* تقليل حجم الكأس قليلاً */
-            }
-
-            .stats-dashboard {
-                /* السماح بتوزيع الإحصائيات في سطرين أو عمودين */
-                justify-content: space-around;
-                gap: 50px;
-            }
-            
-            .stat-item {
-                text-align: center; /* توسيط الإحصائيات */
-            }
-
-            .timeline-section {
-                padding: 60px 40px;
-            }
-            
-            .timeline-grid {
-                /* التأكد من بقاء عمودين على الأقل على معظم الأجهزة اللوحية */
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
         }
 
-        /* شاشات الهواتف والأجهزة اللوحية الصغيرة (<= 768px) */
         @media (max-width: 768px) {
             .navbar {
                 padding: 15px 20px;
-                /* السماح للـ Navbar بالالتفاف عند الضرورة */
-                flex-wrap: wrap;
-                justify-content: flex-start; /* لتبدأ العناصر من اليسار */
+                flex-wrap: wrap; 
             }
-            
+
             .nav-links {
-                /* إخفاء روابط القائمة التقليدية */
-                display: none; 
+                display: none;
             }
 
             .nav-select-menu {
-                /* إظهار القائمة المنسدلة للتنقل */
-                display: block; 
-                order: 1; /* وضع القائمة المنسدلة أولاً */
-                margin-top: 5px;
+                display: block;
+                order: 1; 
+                margin-top: 5px; 
                 margin-bottom: 5px;
-                /* إلغاء الـ margin-right: auto للسماح للبحث بالتمركز */
-                margin-right: 20px; 
             }
 
             .search-container {
-                order: 2; /* وضع البحث ثانياً */
-                /* تم تعديل هذا ليناسب الترتيب الجديد ويكون على اليمين */
+                order: 2; 
                 margin-left: auto; 
-                margin-right: 0;
             }
 
             .search-input {
                 width: 150px;
-                font-size: 14px;
-            }
-            
-            .top-hero-section {
-                 height: 350px; /* تقليل ارتفاع الهيرو */
-            }
-            
-            .top-hero-content .call-to-action {
-                font-size: 44px; /* تقليل حجم خط العنوان */
             }
             
             .hero-section {
                 padding: 40px 20px;
-            }
-
-            .hero-content h1 {
-                font-size: 34px;
-            }
-            
-            .hero-content p {
-                font-size: 16px;
+                flex-direction: column;
+                text-align: center;
             }
 
             .stats-dashboard {
-                /* جعل كل إحصائية في سطر منفصل على الهواتف */
-                flex-direction: column; 
+                flex-direction: column;
                 gap: 30px;
                 align-items: center;
-                width: 100%;
             }
-            
-            .stat-item {
-                text-align: center;
-                width: 100%;
-            }
-
-            .timeline-section {
-                padding: 40px 20px;
-            }
-            
-            .timeline-section h2 {
-                font-size: 28px;
-            }
-
-            .timeline-year-buttons {
-                justify-content: space-between;
-                gap: 10px;
-            }
-
-            .year-button {
-                padding: 10px 15px;
-                font-size: 15px;
-                /* السماح للأزرار بأخذ عرض متساوٍ في سطر واحد على الأقل */
-                flex-basis: 0; 
-                min-width: 80px;
-            }
-
             .timeline-grid {
-                /* عمود واحد على شاشات الهواتف */
-                grid-template-columns: 1fr; 
-            }
-            
-            #travelMap {
-                height: 400px; /* تقليل ارتفاع الخريطة */
-                width: 100%; /* جعل عرض الخريطة 100% ليملأ الشاشة */
-                margin: 40px 0; /* إزالة الهامش الأفقي لملء الشاشة */
-                border-radius: 0; /* إزالة حدود الزوايا على حافة الشاشة */
-                border-left: none;
-                border-right: none;
-            }
-            
-            .footer .socials a {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
+                grid-template-columns: 1fr;
             }
         }
 
-        /* شاشات الهواتف الصغيرة جداً (<= 480px) */
         @media (max-width: 480px) {
-            .navbar {
-                 /* لتجنب الالتفاف على سطرين، يمكن توسيط العناصر بدلاً من ذلك */
-                justify-content: space-between;
-            }
-
-            .nav-select-menu {
-                /* إعطائه عرض أكبر ليتناسب */
-                width: 140px; 
-            }
-            
-            .search-input {
-                width: 100px; /* تقليل عرض حقل البحث أكثر */
-                margin-left: 5px;
-            }
-            
-            .top-hero-section {
-                 height: 300px;
-            }
-            
             .top-hero-content .call-to-action {
                 font-size: 38px;
             }
-            
-            .full-timeline-button {
-                 padding: 10px 20px;
-                 font-size: 16px;
-            }
-            
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Navbar -->
     <header class="navbar">
         <nav class="nav-links">
             <a href="index.html" class="active">Home</a>
-            <a href="about.html">About</a>
+            <!-- Dropdown About Us -->
+<div class="dropdown">
+    <span class="dropbtn">About Us</span>
+    <div class="dropdown-content">
+        <a href="about.html#who-we-are">Who We Are</a>
+        <a href="about.html#mission">Mission</a>
+        <a href="about.html#vision">Vision</a>
+        <a href="about.html#our-impact">Our Impact</a>
+        <a href="about.html#key-achievements">Key Achievements</a>
+        <a href="about.html#make-difference">Make Difference</a>
+    </div>
+</div>
             <a href="achievements.html">Achievements</a>
             <a href="donate.html">Donate</a>
-            <a href="team.html">Team</a>
+
+            <!-- Dropdown Team -->
+            <div class="dropdown">
+                <a class="dropbtn">Our Crew</a>
+                <div class="dropdown-content">
+                    <a href="team.html#team-members">Our team</a>
+                    <a href="team.html#partners">Partners</a>
+                </div>
+            </div>
+
             <a href="contact.html">Contact</a>
         </nav>
-
+        
         <div class="nav-select-menu">
             <select id="mobileNavSelect">
                 <option value="#" disabled selected>Navigate...</option>
@@ -683,26 +547,26 @@
             </select>
         </div>
 
+
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search page content..."
-                title="Press Enter or click search icon to find in page">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search page content..." title="Press Enter or click search icon to find in page">
             <div class="search-icon">
                 <i class="fas fa-search"></i>
             </div>
         </div>
     </header>
 
+
     <section class="top-hero-section">
         <div class="top-hero-content">
             <h1 class="call-to-action">Time To Give For Palestine</h1>
         </div>
     </section>
-
+    
     <section class="hero-section">
         <div class="hero-content">
             <h1>Celebrating Our Achievements</h1>
-            <p>Our mission is to create positive change through dedication and innovation. This section highlights our key
-                achievements.</p>
+            <p>Our mission is to create positive change through dedication and innovation. This section highlights our key achievements.</p>
 
             <div class="stats-dashboard">
                 <div class="stat-item">
@@ -738,8 +602,7 @@
             <div class="timeline-card" data-year="2022">
                 <p class="card-date">Jan 2022</p>
                 <h3 class="card-title">Launched Project Alpha</h3>
-                <p class="card-description">Initial release with core features for testing and feedback. We focused on
-                    community feedback.</p>
+                <p class="card-description">Initial release with core features for testing and feedback. We focused on community feedback.</p>
                 <a href="#" class="card-button">Read More</a>
             </div>
             <div class="timeline-card" data-year="2022">
@@ -752,8 +615,7 @@
             <div class="timeline-card" data-year="2022">
                 <p class="card-date">Aug 2022</p>
                 <h3 class="card-title">Expanded Team</h3>
-                <p class="card-description">Welcomed 5 new members to our engineering and marketing teams. This expansion
-                    supported our mission.</p>
+                <p class="card-description">Welcomed 5 new members to our engineering and marketing teams. This expansion supported our mission.</p>
                 <a href="#" class="card-button">Learn More</a>
             </div>
 
@@ -766,16 +628,14 @@
             <div class="timeline-card" data-year="2023">
                 <p class="card-date">Oct 2023</p>
                 <h3 class="card-title">Launched Beta Features</h3>
-                <p class="card-description">Introduced new interactive features for beta testing with community members.
-                    We aim for excellence.</p>
+                <p class="card-description">Introduced new interactive features for beta testing with community members. We aim for excellence.</p>
                 <a href="#" class="card-button">Explore</a>
             </div>
 
             <div class="timeline-card" data-year="2024">
                 <p class="card-date">Mar 2024</p>
                 <h3 class="card-title">New Platform Update</h3>
-                <p class="card-description">Introduced dark mode, enhanced UX, and mobile optimizations. Innovation is
-                    key to our growth.</p>
+                <p class="card-description">Introduced dark mode, enhanced UX, and mobile optimizations. Innovation is key to our growth.</p>
                 <a href="#" class="card-button">Explore</a>
             </div>
             <div class="timeline-card" data-year="2024">
@@ -815,19 +675,27 @@
 
 
     <footer class="footer" role="contentinfo">
-        <div class="socials" aria-label="Social media links">
-            <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i
-                    class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i
-                    class="fab fa-twitter"></i></a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i
-                    class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><i
-                    class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i
-                    class="fab fa-youtube"></i></a>
+        <div class="social-icons" aria-label="Social media links">
+            <a href="https://www.facebook.com/cisconetworkingacademy/" target="_blank" rel="noopener"
+                aria-label="Facebook">
+                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+            </a>
+            <a href="https://x.com/CiscoNetAcad" target="_blank" rel="noopener" aria-label="Twitter">
+                <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.instagram.com/cisco/" target="_blank" rel="noopener" aria-label="Instagram">
+                <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/school/cisco-networking-academy1/" target="_blank" rel="noopener"
+                aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.youtube.com/playlist?list=PLA48B49E7FB15439B" target="_blank" rel="noopener"
+                aria-label="YouTube">
+                <i class="fab fa-youtube" aria-hidden="true"></i>
+            </a>
         </div>
-        <p>© 2025 Stc alumni. All rights reserved.</p>
+        <p>© 2025 STC alumni. All rights reserved.</p>
     </footer>
 
     <script>
@@ -940,7 +808,7 @@
                     // استبدال وسم الـ span بنصه الداخلي
                     parent.replaceChild(document.createTextNode(span.textContent), span);
                     // إعادة دمج عقد النص المتجاورة
-                    parent.normalize();
+                    parent.normalize(); 
                 });
             };
 
@@ -948,7 +816,7 @@
             const performSearch = () => {
                 // إزالة الـ Highlights القديمة أولاً
                 removeHighlights();
-
+                
                 const query = searchInput.value.trim();
                 if (query === "") {
                     return; // لا يوجد بحث
@@ -962,7 +830,7 @@
                 const walker = document.createTreeWalker(
                     contentContainer,
                     NodeFilter.SHOW_TEXT,
-                    {
+                    { 
                         // تصفية العقد التي لا نريد البحث فيها (مثل سكريبتات أو حقول إدخال)
                         acceptNode: (node) => {
                             // تجاهل العقد الموجودة داخل وسم <script>, <style>, أو حقل الإدخال
@@ -986,14 +854,14 @@
                 let currentNode;
                 while (currentNode = walker.nextNode()) {
                     const parent = currentNode.parentNode;
-
+                    
                     // تقسيم النص وإضافة وسم الـ highlight
                     const newNode = document.createElement('span');
                     newNode.innerHTML = currentNode.data.replace(regex, '<span class="highlight">$1</span>');
-
+                    
                     // استبدال عقدة النص الأصلية بالعقدة الجديدة المحتوية على الهايلايت
                     parent.replaceChild(newNode, currentNode);
-
+                    
                     // الحصول على أول عنصر هايلايت لعمل الـ scroll إليه
                     if (!firstMatchElement) {
                         firstMatchElement = newNode.querySelector('.highlight');
@@ -1006,7 +874,7 @@
                         behavior: 'smooth',
                         block: 'center'
                     });
-
+                    
                     // يمكنك هنا إضافة رسالة بسيطة عن عدد النتائج
                     const count = document.querySelectorAll('.highlight').length;
                     console.log(`Found ${count} matches for "${query}"`);
@@ -1014,18 +882,18 @@
                     console.log(`No matches found for "${query}"`);
                 }
             };
-
+            
             // ربط دالة البحث بزر Enter
             searchInput.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
-                    e.preventDefault();
+                    e.preventDefault(); 
                     performSearch();
                 }
             });
 
             // ربط دالة البحث بأيقونة البحث
             searchIcon.addEventListener('click', performSearch);
-
+            
             // ربط دالة إزالة الـ highlights عند مسح حقل البحث
             searchInput.addEventListener('input', function() {
                 if (this.value.trim() === "") {
@@ -1082,21 +950,59 @@
                     <div style="text-align: right; direction: rtl;">
                         <h3>${place.title}</h3>
                         <p>${place.description}</p>
-                        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="width: 100%; height: auto; margin-top: 10px; border-radius: 5px;">` : ''}
+                        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="max-width: 100%; height: auto; border-radius: 8px; margin-top: 10px;">` : ''}
                     </div>
                 `;
-                L.marker([place.lat, place.lng]).addTo(map)
-                    .bindPopup(popupContent, { minWidth: 200, maxWidth: 300 });
+                L.marker([place.lat, place.lng]).addTo(map).bindPopup(popupContent);
             });
         }
-        
-        addExistingMarkers(); // إضافة العلامات الموجودة عند التحميل
-        
-        // تعديل في طريقة عرض عنصر التحكم بالبحث ليتناسب مع التنسيق العربي (rtl) للخريطة
-        const geocoderContainer = document.querySelector('.leaflet-control-geocoder');
-        if (geocoderContainer) {
-            geocoderContainer.style.direction = 'ltr'; // عنصر التحكم نفسه يجب أن يكون ltr
-            geocoderContainer.querySelector('input').style.textAlign = 'left';
+
+        addExistingMarkers();
+
+        map.on('click', function (e) {
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+
+            const formContent = `
+                <div class="add-marker-form">
+                    <h4>إضافة موقع جديد</h4>
+                    <label for="markerTitle">العنوان:</label><br>
+                    <input type="text" id="markerTitle" placeholder="مثال: شاطئ غزة"><br>
+
+                    <label for="markerDescription">الوصف المختصر:</label><br>
+                    <input type="text" id="markerDescription" placeholder="مثال: منظر جميل"><br>
+
+                    <label for="markerImage">رابط الصورة (اختياري):</label><br>
+                    <input type="text" id="markerImage" placeholder="مثال: https://..."><br>
+
+                    <button onclick="saveMarker(${lat}, ${lng}, this.parentNode)">إضافة</button>
+                </div>
+            `;
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent(formContent)
+                .openOn(map);
+        });
+
+        function saveMarker(lat, lng, formElement) {
+            const title = formElement.querySelector('#markerTitle').value || 'New Location';
+            const description = formElement.querySelector('#markerDescription').value || 'User added this location.';
+            const image = formElement.querySelector('#markerImage').value;
+
+            const newPlace = { lat, lng, title, description, image };
+            visitedPlaces.push(newPlace);
+
+            map.closePopup();
+
+            map.eachLayer(function (layer) {
+                if (layer instanceof L.Marker && layer !== palestineLabel) {
+                    map.removeLayer(layer);
+                }
+            });
+
+            addExistingMarkers();
+
+            console.log(`Location Added: ${title}`);
         }
     </script>
 </body>
