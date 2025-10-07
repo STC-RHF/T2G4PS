@@ -198,10 +198,7 @@
             margin-top: 50px
         }
 
-        /* ----------------------------------------------------------------- */
-        /* --- التعديلات على أيقونات السوشال ميديا --- */
-        /* ----------------------------------------------------------------- */
-        .footer .socials a { /* تم تغيير .social-icons إلى .socials */
+        .footer .social-icons a {
             color: var(--light);
             margin: 0 10px;
             font-size: 18px;
@@ -212,18 +209,8 @@
             height: 44px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.04);
-            text-decoration: none;
-            /* إضافة خاصية الانتقال السلس */
-            transition: all 0.3s ease-in-out; 
+            text-decoration: none
         }
-
-        /* تأثير التفاعل (Hover Effect) */
-        .footer .socials a:hover {
-            background: var(--primary); /* تغيير لون الخلفية عند التفاعل */
-            color: var(--light); /* تثبيت لون الأيقونة */
-            transform: translateY(-3px); /* رفع بسيط للأيقونة */
-        }
-        /* ----------------------------------------------------------------- */
 
         .footer p {
             margin: 8px 0 0;
@@ -235,9 +222,8 @@
         /* ------------------------------------------- */
         @media (max-width: 1000px) {
             .navbar {
-                /* تعديل: السماح بتوزيع العناصر لتبدو متساوية في الفضاء */
-                justify-content: space-between; 
-                padding: 15px 20px; /* تقليل الـ padding ليناسب شاشات الموبايل */
+                justify-content: space-between;
+                /* ضمان توزيع العناصر في شاشات الجوال */
             }
 
             .nav-links {
@@ -246,25 +232,17 @@
 
             .nav-select-menu {
                 display: block;
-                /* تعديل: تحديد عرض مناسب ليكون بجوار شريط البحث */
-                width: 45%; 
-                margin-right: 0; 
                 order: 1; 
+                margin-right: auto;
             }
 
             .search-container {
-                /* تعديل: تحديد عرض مناسب ليكون بجوار القائمة المنسدلة */
-                width: 45%; 
-                margin-left: 0; 
                 order: 2;
-                /* الترتيب (order: 1 و order: 2) يضمنان أنهما جنبًا إلى جنب */
+                margin-left: 0; 
             }
 
             .search-input {
-                /* تعديل: استخدام 100% من عرض الحاوية الجديدة */
-                width: 100%;
-                padding: 5px 5px; /* تقليل الـ padding للبحث */
-                margin-right: 5px;
+                width: 140px;
             }
         }
     </style>
@@ -280,7 +258,7 @@
                 <option value="about.html">About</option>
                 <option value="achievements.html">Achievements</option>
                 <option value="donate.html">Donate</option>
-                <option value="team.html">Team</option>
+                <option value="team.html">our crew/option>
                 <option value="contact.html">Contact</option>
             </select>
         </div>
@@ -290,7 +268,7 @@
             <a href="about.html">About</a>
             <a href="achievements.html">Achievements</a>
             <a href="donate.html">Donate</a>
-            <a href="team.html" class="active">Team</a>
+            <a href="team.html" class="active">our crew</a>
             <a href="contact.html">Contact</a>
         </nav>
 
@@ -303,9 +281,12 @@
         </div>
         </header>
 
-    <section class="page-title">
+    <section class="page-title" id="team-members">
         <h1>Meet Our Team</h1>
     </section>
+<section id="team-section" class="team-grid">
+    <!-- كروت الفريق -->
+</section>
 
     <main class="container">
         <section class="team-grid">
@@ -342,20 +323,48 @@
         </section>
     </main>
 
+    <!-- === Partners Section === -->
+    <section id="partners"   style="margin-top:50px;">
+        <h1 style="text-align: center;">Our Partners</h1>
+    </section>
+
+
+<section id="partners" class="team-grid" style="margin-top:50px;">
+    <!-- كروت الشركاء -->
+</section>
+
+    <section class="team-grid">
+        <div class="team-card">
+            <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Partner One">
+            <h3>Partner One</h3>
+            <p>Partner Organization - Location</p>
+        </div>
+        <div class="team-card">
+            <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Partner Two">
+            <h3>Partner Two</h3>
+            <p>Partner Organization - Location</p>
+        </div>
+        <div class="team-card">
+            <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Partner Three">
+            <h3>Partner Three</h3>
+            <p>Partner Organization - Location</p>
+        </div>
+        <div class="team-card">
+            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Partner Four">
+            <h3>Partner Four</h3>
+            <p>Partner Organization - Location</p>
+        </div>
+    </section>
+</main>
+
     <footer class="footer">
-           <div class="socials" aria-label="Social media links">
-                <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i
-                            class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i
-                            class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i
-                            class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><i
-                            class="fab fa-linkedin-in"></i></a>
-                <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i
-                            class="fab fa-youtube"></i></a>
-            </div>
-            <p>© 2025 Stc alumni. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>© 2025 STC alumni. All rights reserved.</p>
     </footer>
 
     <script>
@@ -410,16 +419,12 @@
                     {
                         // تصفية العقد التي لا نريد البحث فيها
                         acceptNode: (node) => {
-                            const parentElement = node.parentNode;
-                            // تجاهل العقد الموجودة داخل وسم <script>, <style>, حقل الإدخال، أو أيقونات التواصل الاجتماعي
-                            if (parentElement && (
-                                parentElement.closest('script, style, input, textarea, select, .socials') || 
-                                parentElement.getAttribute('aria-label')
-                            )) {
+                            // تجاهل العقد الموجودة داخل وسم <script>, <style>, أو حقل الإدخال
+                            if (node.parentNode.closest('script, style, input, textarea, select')) {
                                 return NodeFilter.FILTER_REJECT;
                             }
                             // تجاهل الـ highlight الذي أضفناه سابقاً
-                            if (parentElement.classList && parentElement.classList.contains('highlight')) {
+                            if (node.parentNode.classList && node.parentNode.classList.contains('highlight')) {
                                 return NodeFilter.FILTER_REJECT;
                             }
                             // يجب أن يحتوي النص على كلمة البحث
